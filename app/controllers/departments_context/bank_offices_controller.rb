@@ -3,7 +3,7 @@
 module DepartmentsContext
   class BankOfficesController < ActionController::Base
     def index
-      GetBankOffices.new.call(:with_nearest_to, **params.to_unsafe_h)
+      GetBankOffices.new.call(:where_nearest_to, **params.to_unsafe_h)
     end
   end
 end

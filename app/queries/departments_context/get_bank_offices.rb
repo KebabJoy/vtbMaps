@@ -8,7 +8,7 @@ module DepartmentsContext
       super(DepartmentsContext::BankOffice)
     end
 
-    def with_nearest_to(location:, **options)
+    def where_nearest_to(location:, **options)
       coords = GisOperations.hash_to_point(lat: location[:latitude], lon: location[:longitude])
 
       joined = DepartmentsContext::BankOffice.joins(<<-SQL.squish)
@@ -20,6 +20,10 @@ module DepartmentsContext
       SQL
 
       joined.select('bank_offices.*, sub_query.*').order("point_distance ASC, bank_offices.load_value ASC")
+    end
+
+    def find_nearest_to(location:, **options)
+      where_nearest_to(location: location, **options).first
     end
   end
 end
