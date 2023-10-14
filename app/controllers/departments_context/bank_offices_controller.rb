@@ -3,7 +3,6 @@
 module DepartmentsContext
   class BankOfficesController < ApplicationController
     def index
-      binding.pry
       @bank_offices =
         GetBankOffices
           .new

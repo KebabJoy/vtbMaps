@@ -17,6 +17,8 @@ gem "bootsnap", require: false
 gem "activerecord-postgis-adapter" # GEO data
 gem "store_model"
 gem "geocoder"
+gem "rswag-api"
+gem "rswag-ui"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -38,4 +40,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rswag-specs"
+  gem "rspec-rails"
 end

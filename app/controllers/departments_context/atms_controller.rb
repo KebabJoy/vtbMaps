@@ -1,9 +1,16 @@
 # frozen_string_literal: true
 
 module DepartmentsContext
-  class AtmsController < ActionController::Base
+  class AtmsController < ApplicationController
     def index
-      @bank_offices = GetAtms.new.call(:all)
+      @atms =
+        GetAtms
+          .new
+          .call(
+            :where_nearest_to,
+            latitude: unsafe_params[:latitude],
+            longitude:  unsafe_params[:longitude]
+          )
     end
   end
 end
