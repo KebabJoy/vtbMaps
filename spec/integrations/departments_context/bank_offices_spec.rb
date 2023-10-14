@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "Bank Accounts", type: :request do
+describe "Bank Accounts", type: :request do
   path "/bank_offices" do
     get "Список отделений" do
       common_with_tags "Отделения"
@@ -18,7 +18,7 @@ RSpec.describe "Bank Accounts", type: :request do
         let!(:address) { create :address, :within_50_km_from_moscow, target: office }
 
         run_test! do |response|
-          expect(response.body).to be_json_eql(office.id.to_json).at_path("id")
+          expect(response.body).to be_json_eql(office.id.to_json).at_path("0/id")
         end
       end
     end

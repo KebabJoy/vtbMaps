@@ -26,8 +26,8 @@ module DepartmentsContext
       collection.joins(<<-SQL.squish)
         LEFT JOIN LATERAL (
           SELECT ST_Distance('#{coords.to_s}', addresses.coords) / #{options[:radius] || Address::DEFAULT_RADIUS} AS point_distance,
-          addresses.id, addresses.target_id AS target_id
-          FROM addresses WHERE target_type = 'DepartmentsContext::BankOffice'
+          addresses.id address_id, addresses.target_id AS target_id
+          FROM addresses WHERE target_type = 'DepartmentsContext::Atm'
         ) AS sub_query ON (atms.id=sub_query.target_id)
       SQL
     end
