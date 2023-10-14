@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      SECRET_KEY_BASE: mysecretkey
+      REDIS_URL: "redis://redis:6379/0"
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: db
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: vtbMaps_development
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
