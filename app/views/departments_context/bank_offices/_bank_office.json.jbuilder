@@ -7,6 +7,11 @@ json.(
     :status,
     :rko,
     :office_type,
-    :sale_point_format
+    :sale_point_format,
+    :load_value,
+    :suo_availability,
+    :has_ramp,
+    :kep,
+    :my_branch
 )
 json.partial! "departments_context/addresses/shared/address", point: bank_office.address

@@ -1,0 +1,641 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/atms":
+    get:
+      summary: Список банкоматов
+      tags:
+      - Банкоматы
+      parameters:
+      - name: latitude
+        in: query
+        format: float
+        schema:
+          type: number
+      - name: longitude
+        in: query
+        format: float
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    allday:
+                      type: boolean
+                    services:
+                      type: object
+                      properties:
+                        wheelchair:
+                          type: object
+                          properties:
+                            service_activity:
+                              type: string
+                            service_capability:
+                              type: string
+                        blind:
+                          type: object
+                          properties:
+                            service_activity:
+                              type: string
+                            service_capability:
+                              type: string
+                        nfc_for_bank_cards:
+                          type: object
+                          properties:
+                            service_activity:
+                              type: string
+                            service_capability:
+                              type: string
+                        qr_read:
+                          type: object
+                          properties:
+                            service_activity:
+                              type: string
+                            service_capability:
+                              type: string
+                        supports_usd:
+                          type: object
+                          properties:
+                            service_activity:
+                              type: string
+                            service_capability:
+                              type: string
+                        supports_charge_rub:
+                          type: object
+                          properties:
+                            service_activity:
+                              type: string
+                            service_capability:
+                              type: string
+                        supports_eur:
+                          type: object
+                          properties:
+                            service_activity:
+                              type: string
+                            service_capability:
+                              type: string
+                        supports_rub:
+                          type: object
+                          properties:
+                            service_activity:
+                              type: string
+                            service_capability:
+                              type: string
+                    raw_value:
+                      type: string
+                    coords:
+                      type: object
+                      properties:
+                        lat:
+                          type: number
+                          format: float
+                          nullable: true
+                        lon:
+                          type: number
+                          format: float
+                          nullable: true
+                      nullable: true
+                      required:
+                      - lat
+                      - lon
+                      additionalProperties: false
+                  required: []
+                  additionalProperties: false
+  "/atm":
+    get:
+      summary: Список Банкоматов
+      tags:
+      - Банкоматы
+      parameters:
+      - name: latitude
+        in: query
+        format: float
+        schema:
+          type: number
+      - name: longitude
+        in: query
+        format: float
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  allday:
+                    type: boolean
+                  services:
+                    type: object
+                    properties:
+                      wheelchair:
+                        type: object
+                        properties:
+                          service_activity:
+                            type: string
+                          service_capability:
+                            type: string
+                      blind:
+                        type: object
+                        properties:
+                          service_activity:
+                            type: string
+                          service_capability:
+                            type: string
+                      nfc_for_bank_cards:
+                        type: object
+                        properties:
+                          service_activity:
+                            type: string
+                          service_capability:
+                            type: string
+                      qr_read:
+                        type: object
+                        properties:
+                          service_activity:
+                            type: string
+                          service_capability:
+                            type: string
+                      supports_usd:
+                        type: object
+                        properties:
+                          service_activity:
+                            type: string
+                          service_capability:
+                            type: string
+                      supports_charge_rub:
+                        type: object
+                        properties:
+                          service_activity:
+                            type: string
+                          service_capability:
+                            type: string
+                      supports_eur:
+                        type: object
+                        properties:
+                          service_activity:
+                            type: string
+                          service_capability:
+                            type: string
+                      supports_rub:
+                        type: object
+                        properties:
+                          service_activity:
+                            type: string
+                          service_capability:
+                            type: string
+                  raw_value:
+                    type: string
+                  coords:
+                    type: object
+                    properties:
+                      lat:
+                        type: number
+                        format: float
+                        nullable: true
+                      lon:
+                        type: number
+                        format: float
+                        nullable: true
+                    nullable: true
+                    required:
+                    - lat
+                    - lon
+                    additionalProperties: false
+                required: []
+                additionalProperties: false
+  "/autocomplete/bank_offices":
+    get:
+      summary: Список отделений
+      tags:
+      - Отделения
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  load_value:
+                    type: integer
+                  sale_point_name:
+                    type: string
+                  status:
+                    type: string
+                  office_type:
+                    type: string
+                  sale_point_format:
+                    type: string
+                  rko:
+                    type: boolean
+                  suo_availability:
+                    type: boolean
+                  has_ramp:
+                    type: boolean
+                  kep:
+                    type: boolean
+                  my_branch:
+                    type: boolean
+                  open_hours:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        days:
+                          type: string
+                        hours:
+                          type: string
+                  open_hours_individual:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        days:
+                          type: string
+                        hours:
+                          type: string
+                  raw_value:
+                    type: string
+                  coords:
+                    type: object
+                    properties:
+                      lat:
+                        type: number
+                        format: float
+                        nullable: true
+                      lon:
+                        type: number
+                        format: float
+                        nullable: true
+                    nullable: true
+                    required:
+                    - lat
+                    - lon
+                    additionalProperties: false
+                required: []
+                additionalProperties: false
+  "/bank_offices":
+    get:
+      summary: Список отделений
+      tags:
+      - Отделения
+      parameters:
+      - name: latitude
+        in: query
+        format: float
+        schema:
+          type: number
+      - name: longitude
+        in: query
+        format: float
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    load_value:
+                      type: integer
+                    sale_point_name:
+                      type: string
+                    status:
+                      type: string
+                    office_type:
+                      type: string
+                    sale_point_format:
+                      type: string
+                    rko:
+                      type: boolean
+                    suo_availability:
+                      type: boolean
+                    has_ramp:
+                      type: boolean
+                    kep:
+                      type: boolean
+                    my_branch:
+                      type: boolean
+                    open_hours:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          days:
+                            type: string
+                          hours:
+                            type: string
+                    open_hours_individual:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          days:
+                            type: string
+                          hours:
+                            type: string
+                    raw_value:
+                      type: string
+                    coords:
+                      type: object
+                      properties:
+                        lat:
+                          type: number
+                          format: float
+                          nullable: true
+                        lon:
+                          type: number
+                          format: float
+                          nullable: true
+                      nullable: true
+                      required:
+                      - lat
+                      - lon
+                      additionalProperties: false
+                  required: []
+                  additionalProperties: false
+  "/bank_office":
+    get:
+      summary: Список отделений
+      tags:
+      - Отделения
+      parameters:
+      - name: latitude
+        in: query
+        format: float
+        schema:
+          type: number
+      - name: longitude
+        in: query
+        format: float
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  load_value:
+                    type: integer
+                  sale_point_name:
+                    type: string
+                  status:
+                    type: string
+                  office_type:
+                    type: string
+                  sale_point_format:
+                    type: string
+                  rko:
+                    type: boolean
+                  suo_availability:
+                    type: boolean
+                  has_ramp:
+                    type: boolean
+                  kep:
+                    type: boolean
+                  my_branch:
+                    type: boolean
+                  open_hours:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        days:
+                          type: string
+                        hours:
+                          type: string
+                  open_hours_individual:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        days:
+                          type: string
+                        hours:
+                          type: string
+                  raw_value:
+                    type: string
+                  coords:
+                    type: object
+                    properties:
+                      lat:
+                        type: number
+                        format: float
+                        nullable: true
+                      lon:
+                        type: number
+                        format: float
+                        nullable: true
+                    nullable: true
+                    required:
+                    - lat
+                    - lon
+                    additionalProperties: false
+                required: []
+                additionalProperties: false
+servers:
+- url: http://localhost:3000/
+schemas:
+  address:
+    raw_value:
+      type: string
+    coords:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: float
+          nullable: true
+        lon:
+          type: number
+          format: float
+          nullable: true
+      nullable: true
+      required:
+      - lat
+      - lon
+      additionalProperties: false
+  atms:
+    type: object
+    properties:
+      id:
+        type: integer
+      allday:
+        type: boolean
+      services:
+        type: object
+        properties:
+          wheelchair:
+            type: object
+            properties:
+              service_activity:
+                type: string
+              service_capability:
+                type: string
+          blind:
+            type: object
+            properties:
+              service_activity:
+                type: string
+              service_capability:
+                type: string
+          nfc_for_bank_cards:
+            type: object
+            properties:
+              service_activity:
+                type: string
+              service_capability:
+                type: string
+          qr_read:
+            type: object
+            properties:
+              service_activity:
+                type: string
+              service_capability:
+                type: string
+          supports_usd:
+            type: object
+            properties:
+              service_activity:
+                type: string
+              service_capability:
+                type: string
+          supports_charge_rub:
+            type: object
+            properties:
+              service_activity:
+                type: string
+              service_capability:
+                type: string
+          supports_eur:
+            type: object
+            properties:
+              service_activity:
+                type: string
+              service_capability:
+                type: string
+          supports_rub:
+            type: object
+            properties:
+              service_activity:
+                type: string
+              service_capability:
+                type: string
+      raw_value:
+        type: string
+      coords:
+        type: object
+        properties:
+          lat:
+            type: number
+            format: float
+            nullable: true
+          lon:
+            type: number
+            format: float
+            nullable: true
+        nullable: true
+        required:
+        - lat
+        - lon
+        additionalProperties: false
+    required: []
+    additionalProperties: false
+  bank_offices:
+    type: object
+    properties:
+      id:
+        type: integer
+      load_value:
+        type: integer
+      sale_point_name:
+        type: string
+      status:
+        type: string
+      office_type:
+        type: string
+      sale_point_format:
+        type: string
+      rko:
+        type: boolean
+      suo_availability:
+        type: boolean
+      has_ramp:
+        type: boolean
+      kep:
+        type: boolean
+      my_branch:
+        type: boolean
+      open_hours:
+        type: array
+        items:
+          type: object
+          properties:
+            days:
+              type: string
+            hours:
+              type: string
+      open_hours_individual:
+        type: array
+        items:
+          type: object
+          properties:
+            days:
+              type: string
+            hours:
+              type: string
+      raw_value:
+        type: string
+      coords:
+        type: object
+        properties:
+          lat:
+            type: number
+            format: float
+            nullable: true
+          lon:
+            type: number
+            format: float
+            nullable: true
+        nullable: true
+        required:
+        - lat
+        - lon
+        additionalProperties: false
+    required: []
+    additionalProperties: false

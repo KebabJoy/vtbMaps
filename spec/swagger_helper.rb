@@ -5,8 +5,19 @@ require 'rails_helper'
 module Swagger
   module_function
 
-  def ref(name)
-    {"$ref" => "#/components/schemas/#{name}"}
+  def read_definitions(path)
+    pattern = Rails.root.join("spec/swagger/definitions/#{path}/*.rb")
+
+    Dir[pattern].to_h { |model_path|
+      [File.basename(model_path, ".rb"), read_definition(model_path, expand: false)]
+    }
+  end
+
+  def read_definition(path, expand: true)
+    expanded_path = expand ? Rails.root.join("spec/swagger/definitions/#{path}.rb") : path
+    eval File.read(expanded_path)
+  rescue Exception => e
+    raise "Error occured on reading #{expanded_path}: #{e.class} - #{e.message}"
   end
 end
 
@@ -14,11 +25,11 @@ RSpec.configure do |config|
   config.swagger_root = Rails.root.join('swagger').to_s
   config.include IntegrationHelpers
   config.define_derived_metadata(file_path: Regexp.new("/spec/integration")) do |metadata|
-    metadata[:swagger_doc] = "web.yaml"
+    metadata[:swagger_doc] = "v1/swagger.yaml"
   end
 
   config.swagger_docs = {
-    'web.yaml' => {
+    'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
         title: 'API V1',
@@ -26,16 +37,9 @@ RSpec.configure do |config|
       },
       paths: {},
       servers: [
-        {
-          url: 'https://{defaultHost}',
-          variables: {
-            defaultHost: {
-              default: 'www.example.com'
-            }
-          }
-        },
-        {url: "http://localhost:3000/web"}
-      ]
+        {url: "http://localhost:3000/"}
+      ],
+      schemas: Swagger.read_definitions("")
     }
   }
 
