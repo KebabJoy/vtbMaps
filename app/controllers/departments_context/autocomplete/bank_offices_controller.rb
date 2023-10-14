@@ -2,9 +2,9 @@
 
 module DepartmentsContext
   module Autocomplete
-    class BankOfficesController < ActionController::Base
+    class BankOfficesController < ApplicationController
       def index
-        @bank_offices = GetBankOffices.new.call(:find_by_raw_value)
+        @bank_offices = GetBankOffices.new.call(:find_by_raw_value, query: unsafe_params[:query])
       end
     end
   end

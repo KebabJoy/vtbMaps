@@ -3,7 +3,7 @@
 module DepartmentsContext
   class GetAtms < BaseQuery
     def initialize
-      super { Atm.all }
+      super { Atm.includes(:address) }
     end
 
     def where_nearest_to(collection, *_args, latitude:, longitude:, **options)

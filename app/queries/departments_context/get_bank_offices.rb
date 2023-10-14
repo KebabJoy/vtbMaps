@@ -3,13 +3,13 @@
 module DepartmentsContext
   class GetBankOffices < BaseQuery
     def initialize
-      super { BankOffice.all }
+      super { BankOffice.includes(:address) }
     end
 
     def where_nearest_to(collection, *_args, latitude:, longitude:, **options)
       joined = with_ordered_addresses(collection, latitude: latitude, longitude: longitude, **options)
 
-      joined.select('bank_offices.*, sub_query.*').where("sub_query.point_distance < 2").order("point_distance ASC, bank_offices.load_value ASC")
+      joined.select('bank_offices.*, sub_query.*').where("sub_query.point_distance < 1").order("point_distance ASC, bank_offices.load_value ASC")
     end
 
     def find_nearest_to(collection, location:, **options)

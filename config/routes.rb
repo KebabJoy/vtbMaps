@@ -5,5 +5,11 @@ Rails.application.routes.draw do
   scope module: :departments_context do
     resources :bank_offices, only: %i[index]
     resources :atms, only: %i[index]
+
+    resource :autocomplete, only: [] do
+      scope module: :autocomplete do
+        resources :bank_offices, only: %i[index]
+      end
+    end
   end
 end
