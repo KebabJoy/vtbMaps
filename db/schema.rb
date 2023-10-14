@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_14_140115) do
     t.integer "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "load_value", default: 0
   end
 
 end

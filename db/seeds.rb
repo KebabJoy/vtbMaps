@@ -28,6 +28,7 @@ offices = JSON.parse(File.read('Data/offices.txt')).each do |hash|
   office_attributes[:rko] = rko_bool_mapping[hash[:rko]]
   office_attributes[:has_ramp] = bool_mapping[hash[:has_ramp]]
   office_attributes[:suo_availability] = bool_mapping[hash[:suo_availability]]
+  office_attributes[:load_value] = rand(1..10)
 
   coords = GisOperations.hash_to_point(lat: hash[:latitude], lon: hash[:longitude])
   office_attributes[:address_attributes] = {raw_value: hash[:address], coords: coords}
