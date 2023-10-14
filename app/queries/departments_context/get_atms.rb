@@ -12,8 +12,10 @@ module DepartmentsContext
       joined.select('atms.*, sub_query.*').where("sub_query.point_distance < 2").order("point_distance ASC")
     end
 
-    def find_nearest_to(collection, location:, **options)
-      where_nearest_to(collection,location: location, **options).order("point_distance ASC").first
+    def find_nearest_to(collection, latitude:, longitude:, **options)
+      joined = with_ordered_addresses(collection, latitude:, longitude:, **options)
+
+      joined.select('atms.*, sub_query.*').order("point_distance ASC").first
     end
 
     private

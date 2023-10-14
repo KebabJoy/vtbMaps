@@ -17,6 +17,11 @@ module VtbMaps
         resource '/*', headers: :any, methods: [:patch, :post, :get, :put]
       end
     end
+
+    config.generators do |g|
+      g.test_framework :rspec, fixture: true
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
+    end
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

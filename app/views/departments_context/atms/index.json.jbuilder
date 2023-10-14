@@ -1,5 +1,4 @@
 json.array!(@atms) do |atm|
-  json.(atm, :allday, :services)
-  json.partial! "departments_context/addresses/shared/address", point: atm.address
+  json.partial! "departments_context/atms/atm", atm: atm
 end
 
