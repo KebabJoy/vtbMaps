@@ -37,10 +37,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_14_093334) do
     t.text "sale_point_name"
     t.jsonb "open_hours", default: {}, null: false, comment: "Расписание"
     t.jsonb "open_hours_individual", default: {}, null: false, comment: "Расписание для конкретного отделения"
-    t.integer "status", default: 0, null: false
+    t.string "status", null: false
     t.boolean "rko", default: false, null: false
     t.string "office_type", null: false
-    t.integer "sale_point_format", default: 0, null: false
+    t.string "sale_point_format", null: false
     t.boolean "suo_availability", default: false
     t.boolean "has_ramp", default: false
     t.boolean "kep", default: false
