@@ -8,8 +8,8 @@ module DepartmentsContext
       class Schedule
         include StoreModel::Model
 
-        attribute :day, :string
-        attribute :working_hours, :string
+        attribute :days, :string
+        attribute :hours, :string
       end
 
       included do

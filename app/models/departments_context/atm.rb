@@ -22,7 +22,7 @@ module DepartmentsContext
       attribute :supports_rub, ServiceAvailability.to_type
     end
 
-    has_one :address, as: :target, class_name: "Address"
+    has_one :address, as: :target, class_name: "DepartmentsContext::Address", dependent: :destroy
 
     accepts_nested_attributes_for :address
 

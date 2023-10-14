@@ -1,5 +1,3 @@
-require_relative Rails.root.join('lib', 'gis_operations.rb')
-
 bool_mapping = {
   "N" => false,
   "Y" => true,
@@ -45,11 +43,4 @@ atms = JSON.parse(File.read('Data/atms.txt'))['atms'].each do |hash|
   atm_attributes[:address_attributes] = {raw_value: hash[:address], coords: coords}
 
   DepartmentsContext::Atm.create!(atm_attributes)
-end
-
-create_table "atms", force: :cascade do |t|
-  t.boolean "allday", default: false, comment: "Круглосуточно"
-  t.jsonb "services", default: {}, null: false, comment: "Доступность отделения"
-  t.datetime "created_at", null: false
-  t.datetime "updated_at", null: false
 end

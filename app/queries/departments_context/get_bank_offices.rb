@@ -5,7 +5,7 @@ module DepartmentsContext
     DEFAULT_RADIUS = 1000
 
     def initialize
-      super(DepartmentsContext::BankOffice)
+      super { DepartmentsContext::BankOffice.all }
     end
 
     def where_nearest_to(location:, **options)
